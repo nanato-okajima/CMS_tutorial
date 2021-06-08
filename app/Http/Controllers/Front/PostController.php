@@ -1,20 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 一覧画面
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        //公開・新しい順に表示
+        $posts = Post::where('is_public', true)
+           ->orderBy('published_at', 'desc')
+           ->paginate(10);
+
+        return view('front.posts.index', compact('posts'));
     }
 
     /**
@@ -39,14 +45,16 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 詳細画面
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param  int  $int
+     * @return \Illuminate\Contracts\View\View
      */
-    public function show(Post $post)
+    public function show(int $id)
     {
-        //
+        $post = Post::where('is_public', true)->findOrFail($id);
+
+        return view('front.posts.show', compact('post'));
     }
 
     /**
