@@ -51,13 +51,12 @@ class RouteServiceProvider extends ServiceProvider
 
             //管理画面
             Route::prefix('admin')
-                ->middleware('web')
+                ->middleware(['web', 'auth'])
                 ->namespace($this->namespace . '\Back')
                 ->as('back.')
                 ->group(base_path('routes/back.php'));
         });
     }
-
     /**
      * Configure the rate limiters for the application.
      *
