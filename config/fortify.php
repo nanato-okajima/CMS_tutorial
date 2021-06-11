@@ -132,7 +132,6 @@ return [
 
     'features' => [],
 
-
-    'path' => 'admin',
+    'path' =>'admin',
 
 ];
