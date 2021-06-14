@@ -34,6 +34,16 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        //保存時user_idをログインユーザに変更
+        self::saving(function($post) {
+            $post->user_id = \Auth::id();
+        });
+    }
+
     protected $fillable = [
         'title', 'body', 'is_public', 'published_at'
     ];
@@ -67,5 +77,10 @@ class Post extends Model
     public function getPublishedFormatAttribute()
     {
         return $this->published_at;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
