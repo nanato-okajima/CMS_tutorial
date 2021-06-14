@@ -38,7 +38,7 @@ class Post extends Model
         'title', 'body', 'is_public', 'published_at'
     ];
 
-    protected $cast = [
+    protected $casts = [
         'is_public' => 'bool',
         'published_at' => 'datetime'
     ];
