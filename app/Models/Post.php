@@ -60,12 +60,18 @@ class Post extends Model
     }
 
     // 公開記事一覧取得
-    public function scopePublicList(Builder $query)
+    public function scopePublicList(Builder $query, string $tagSlug = null)
     {
+        if ($tagSlug) {
+            $query->whereHas('tags', function($query) use ($tagSlug) {
+                $query->where('slug', $tagSlug);
+            });
+        }
         return $query
-               ->public()
-               ->latest('published_at')
-               ->paginate(10);
+            ->with('tags')
+            ->public()
+            ->latest('published_at')
+            ->paginate(10);
     }
 
     // 公開記事をIDで取得
@@ -82,5 +88,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

@@ -1,27 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
-
-class PostController extends Controller
+class TagController extends Controller
 {
     /**
-     * 一覧画面
+     * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
-    public function index($tagSlug = null)
+    public function index()
     {
-        //公開・新しい順に表示
-        $posts =  Post::publicList($tagSlug);
-        $tags  = Tag::all();
-
-        return view('front.posts.index', compact('posts', 'tags'));
+        //
     }
 
     /**
@@ -46,24 +39,23 @@ class PostController extends Controller
     }
 
     /**
-     * 詳細画面
+     * Display the specified resource.
      *
-     * @param  int  $int
-     * @return \Illuminate\Contracts\View\View
+     * @param  \App\Models\Tag  $tag
+     * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show(Tag $tag)
     {
-        $post = Post::publicFindById($id);
-        return view('front.posts.show', compact('post'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Tag $tag)
     {
         //
     }
@@ -72,10 +64,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -83,10 +75,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Tag $tag)
     {
         //
     }
