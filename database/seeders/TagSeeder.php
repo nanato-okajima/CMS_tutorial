@@ -37,8 +37,8 @@ class TagSeeder extends Seeder
         for ($i = 1; $i <= 50; $i++) {
             \DB::table('post_tag')->insert([
                 'post_id' => $i,
-                'tag_id'  => $faker->numberBetween('1, 3')
-            ]); 
+                'tag_id'  => $faker->numberBetween(1, 3)
+            ]);
         }
     }
 }
